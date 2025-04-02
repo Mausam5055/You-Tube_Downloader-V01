@@ -1,149 +1,99 @@
-# YouTube Video & MP3 Downloader (Version 1) 🎥🎵
+# YouTube Video & MP3 Downloader 🎥🎵
 
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Pytube](https://img.shields.io/badge/Library-Pytube-orange)](https://pytube.io/)
 
-A simple **Python script** to download YouTube videos as MP4 or convert them to MP3 **without using a web server**.
+A modern Python-based tool for downloading YouTube videos and converting them to MP3 format. Simple, efficient, and user-friendly.
 
-## Table of Contents
-- [Features](#-features)
-- [Preview](#-preview)
-- [Installation & Setup](#-installation--setup)
-- [Usage](#-usage)
-- [Troubleshooting](#-troubleshooting)
-- [License](#-license)
-- [Author](#-author)
-- [What's Next?](#-whats-next)
+## ✨ Features
 
----
+- 🎥 Download YouTube videos in MP4 format
+- 🎵 Convert YouTube videos to MP3 format
+- 📂 Customizable download directory
+- ⚡ Fast and efficient downloads
+- 🔒 No web server required
+- 🎨 Clean command-line interface
 
-## 🚀 Features
-- 👥 Download YouTube videos in MP4 format
-- 🎷 Convert YouTube videos to MP3 format
-- 📂 Saves files in a user-specified directory
-- 🔥 No extra setup required, runs with a simple command
+## 🖼️ Preview
 
----
+![Preview Image](preview.png)
 
-## 📌 Preview
-![Preview Image](preview.png)  
+## 🚀 Quick Start
 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Mausam5055/You-Tube_Downloader-V01.git
+   cd You-Tube_Downloader-V01
+   ```
 
----
+2. **Install dependencies**
+   ```bash
+   pip install pytube
+   ```
 
-## 🛠️ Installation & Setup
+3. **Run the script**
+   ```bash
+   python downloader.py
+   ```
 
-### Prerequisites
-- Python 3.7+
-- `pytube` library for downloading YouTube videos
-- `ffmpeg` (optional, for MP3 conversion)
+## 📋 Prerequisites
 
-### Install Dependencies
-```sh
-pip install pytube
-```
-For MP3 conversion, install FFmpeg:
+- Python 3.7 or higher
+- FFmpeg (for MP3 conversion)
+
+### Installing FFmpeg
 
 #### Windows
-- Download from [FFmpeg Official Builds](https://ffmpeg.org/download.html)
-- Extract ZIP and add `ffmpeg/bin` to system `PATH`
-- Verify installation:
-  ```sh
-  ffmpeg -version
-  ```
+1. Download from [FFmpeg Official Builds](https://ffmpeg.org/download.html)
+2. Extract the ZIP file
+3. Add `ffmpeg/bin` to your system PATH
+4. Verify installation:
+   ```bash
+   ffmpeg -version
+   ```
 
-#### macOS (Homebrew)
-```sh
+#### macOS
+```bash
 brew install ffmpeg
 ```
 
-#### Linux (Debian/Ubuntu)
-```sh
+#### Linux
+```bash
 sudo apt update && sudo apt install ffmpeg
 ```
 
----
+## 💡 Usage
 
-## ▶️ Usage
-Run the script:
-```sh
+### Basic Usage
+```bash
 python downloader.py
 ```
-OR
-Run with a specific YouTube URL:
-```sh
+
+### Direct URL Download
+```bash
 python downloader.py "https://www.youtube.com/watch?v=your_video_id"
 ```
 
----
+## 🛠️ Troubleshooting
 
-## 🌟 downloader.py (Main Script)
-```python
-import os
-import sys
-import pytube
-
-# Function to download video
-def download_video(url, output_path):
-    try:
-        yt = pytube.YouTube(url)
-        stream = yt.streams.filter(progressive=True, file_extension="mp4").first()
-        print(f"Downloading: {yt.title}")
-        stream.download(output_path)
-        print(f"Downloaded Successfully: {yt.title}\nSaved to: {output_path}")
-    except Exception as e:
-        print(f"Error: {e}")
-
-# Function to convert to MP3
-def convert_to_mp3(video_path):
-    try:
-        mp3_path = video_path.replace(".mp4", ".mp3")
-        os.system(f'ffmpeg -i "{video_path}" -q:a 0 -map a "{mp3_path}" -y')
-        print(f"Converted to MP3: {mp3_path}")
-    except Exception as e:
-        print(f"MP3 Conversion Failed: {e}")
-
-# Main function
-def main():
-    if len(sys.argv) > 1:
-        video_url = sys.argv[1]
-    else:
-        video_url = input("Enter YouTube Video URL: ")
-
-    output_directory = "Downloads"
-    os.makedirs(output_directory, exist_ok=True)
-
-    download_video(video_url, output_directory)
-
-    choice = input("Convert to MP3? (y/n): ").strip().lower()
-    if choice == "y":
-        video_file = os.path.join(output_directory, pytube.YouTube(video_url).streams.first().default_filename)
-        convert_to_mp3(video_file)
-
-if __name__ == "__main__":
-    main()
-```
-
----
-
-## 🔧 Troubleshooting
 | Issue | Solution |
-|--------|----------|
-| `pytube` not found | Install with `pip install pytube` |
-| `FFmpeg` not found | Verify `PATH` configuration, restart terminal |
-| Download fails | Check YouTube URL validity |
-| MP3 conversion fails | Ensure `FFmpeg` is installed and configured properly |
+|-------|----------|
+| `pytube` not found | Run `pip install pytube` |
+| FFmpeg errors | Verify PATH configuration |
+| Download failures | Check URL validity |
+| MP3 conversion issues | Ensure FFmpeg is properly installed |
 
----
+## 📝 License
 
-## 🌜 License
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
-
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
-**Mausam Kar**  
-[GitHub](https://github.com/Mausam5055/)  
-Contributions & suggestions welcome! 🚀
+
+**Mausam Kar**
+- [GitHub](https://github.com/Mausam5055/)
+- [Contributions Welcome](https://github.com/Mausam5055/You-Tube_Downloader-V01/issues)
+
+---
+Made with ❤️ by Mausam Kar
 
